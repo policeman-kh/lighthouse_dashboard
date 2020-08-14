@@ -1,0 +1,26 @@
+global:
+  scrape_interval: 5m 
+  evaluation_interval: 15s 
+  scrape_timeout: 3m
+
+scrape_configs:
+  # https://www.npmjs.com/package/prometheus_lighthouse_exporter
+  - job_name: 'lighthouse'
+    metrics_path: /probe
+    static_configs:
+      - targets:
+        # Set target urls.
+        - 'https://store.line.me'
+        #- 'https://store.line.me/stickershop/product/18272/ja'
+        #- 'https://store.line.me/emojishop/product/5edd74c88e3d615358551348/ja'
+        #- 'https://store.line.me/themeshop/product/850c5229-2e77-4b73-97be-76e3ab4a7c42/ja'
+        #- 'https://store.line.me/family/live/ja?select=mobile'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        # Set hostname and port of exporter.
+        # "host.docker.internal" is host name of host OS.
+        replacement: host.docker.internal:9593
