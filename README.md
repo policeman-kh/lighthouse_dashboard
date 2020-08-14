@@ -2,7 +2,7 @@
 
 <img src="./screen_shot.png">
 
-## Middleware
+## Middlewares
 * Prometheus
 * Grafana
 * Docker
@@ -13,7 +13,7 @@
 ### Run applications.
 
 ```
-$ docker-compose up -d 
+$ docker-compose up --build -d
 ```
 
 ### Create dashboard on Grafana.
